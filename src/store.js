@@ -1,9 +1,15 @@
+import { act } from "react";
 import ListaDeTareas from "./components/Tareas";
 
 export const initialStore = () => {
   return {
-    ListaDeTareas: [],
-    inputValue: '',
+    listaDeTareas: [],
+    inputValue: {
+      name: "",
+      phone: "",
+      email: "",
+      address: ""
+    },
     message: null,
     todos: [
       {
@@ -20,6 +26,7 @@ export const initialStore = () => {
   }
 }
 
+
 export default function storeReducer(store, action = {}) {
   switch (action.type) {
     case 'add_task':
@@ -30,27 +37,38 @@ export default function storeReducer(store, action = {}) {
         ...store,
         todos: store.todos.map((todo) => (todo.id === id ? { ...todo, background: color } : todo))
       }
+    
+    case 'cargar_tareas':
+        return {
+          ...store,
+          listaDeTareas: action.payload
+        }
 
     case 'input_value':
-      const { inputValue } = action.payload
       return {
         ...store,
-        inputValue:inputValue
-      }
+        inputValue: {
+          ...store.inputValue,
+          [action.key]: action.value
+        }
+      };
 
     case 'anhadir_tarea':
 
-      return{
+      return {
         ...store,
-        ListaDeTareas:[...store.ListaDeTareas,store.inputValue]
+        listaDeTareas: [...store.listaDeTareas, action.payload]
       }
     case 'eliminar_tareas':
       const { index } = action.payload
       return {
         ...store,
-        ListaDeTareas: store.ListaDeTareas.filter((_,id)=> id !== index)
+        listaDeTareas: store.listaDeTareas.filter((_, id) => id !== index)
       }
-    
+
+    case "Limpiar_input":
+      return { ...store, inputValue: action.payload };
+
     default:
       throw Error('Unknown action.');
   }
