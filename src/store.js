@@ -1,5 +1,5 @@
 import { act } from "react";
-import ListaDeTareas from "./components/Tareas";
+import ListaDeTareas from "./components/contactos";
 
 export const initialStore = () => {
   return {
@@ -60,10 +60,9 @@ export default function storeReducer(store, action = {}) {
         listaDeTareas: [...store.listaDeTareas, action.payload]
       }
     case 'eliminar_tareas':
-      const { index } = action.payload
       return {
         ...store,
-        listaDeTareas: store.listaDeTareas.filter((_, id) => id !== index)
+        listaDeTareas: store.listaDeTareas.filter((item) => item.id !== action.payload)
       }
 
     case "Limpiar_input":

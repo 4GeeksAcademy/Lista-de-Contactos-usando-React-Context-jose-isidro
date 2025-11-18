@@ -1,4 +1,4 @@
-
+//este es mi POST de contacto de la api
 export function anhadirContacto(funciones, contacto) {
 
     fetch(`https://playground.4geeks.com/contact/agendas/alonso/contacts`, {
@@ -22,7 +22,7 @@ export function anhadirContacto(funciones, contacto) {
             console.log("Error:", e);
         })
 }
-
+//este es mi GET de contactos de la api
 export function cargarContactos(funcion) {
     fetch("https://playground.4geeks.com/contact/agendas/alonso")
         .then(resp => resp.json())
@@ -32,3 +32,19 @@ export function cargarContactos(funcion) {
         })
         .catch(error => console.log(error))
 }
+
+//este es mi DETELE de contactos de la api
+export function eliminarContactos(funcion,id){
+    fetch(`https://playground.4geeks.com/contact/agendas/alonso/contacts/${id}`,{ 
+			method: "DELETE" })
+    .then(response => {
+        if(response.ok){
+            funcion({
+                type:'eliminar_tareas',
+                payload:id
+            })
+        }
+    })
+    .catch (error => (console.log("Error borrando contacto:", error)))
+  }
+
