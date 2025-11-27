@@ -22,7 +22,14 @@ export default function ListaDeTareas() {
                             <p className="fs-5 text-secondary my-auto"><i className="fa-solid fa-envelope"></i> {item.email}</p>
                         </div>
                     </div>
-                    <button type="button" className="btn my-auto boton border border-0" aria-label="Close" onClick={() => { eliminarContactos(dispatch, item.id) }}><i className="fa-solid fa-trash-can"></i></button>
+                    <div className="my-auto">
+                        <Link
+                            type="button"
+                            to={`/formulario/${item.id}`}
+                            className="btn my-auto boton border border-0"
+                        ><i className="fa-solid fa-pencil"></i></Link>
+                        <button type="button" className="btn my-auto boton border border-0" aria-label="Close" onClick={() => { eliminarContactos(dispatch, item.id) }}><i className="fa-solid fa-trash-can"></i></button>
+                    </div>
                 </li>
             ))}
         </>

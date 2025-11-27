@@ -37,12 +37,12 @@ export default function storeReducer(store, action = {}) {
         ...store,
         todos: store.todos.map((todo) => (todo.id === id ? { ...todo, background: color } : todo))
       }
-    
+
     case 'cargar_tareas':
-        return {
-          ...store,
-          listaDeTareas: action.payload
-        }
+      return {
+        ...store,
+        listaDeTareas: action.payload
+      }
 
     case 'input_value':
       return {
@@ -67,6 +67,20 @@ export default function storeReducer(store, action = {}) {
 
     case "Limpiar_input":
       return { ...store, inputValue: action.payload };
+
+    case "editar_tarea":
+      return {
+        ...store,
+        listaDeTareas: store.listaDeTareas.map(item =>
+          item.id === action.payload.id ? action.payload : item
+        )
+      };
+
+    case "input_value_set":
+      return {
+        ...store,
+        inputValue: action.payload
+      };
 
     default:
       throw Error('Unknown action.');

@@ -48,3 +48,20 @@ export function eliminarContactos(funcion,id){
     .catch (error => (console.log("Error borrando contacto:", error)))
   }
 
+  export function editarContacto(funciones, id, contacto) {
+
+    fetch(`https://playground.4geeks.com/contact/agendas/alonso/contacts/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(contacto)
+    })
+        .then(response => response.json())
+        .then(data => {
+            funciones({ type: "editar_tarea", payload: data });
+            funciones({
+                type: "Limpiar_input",
+                payload: { name: "", phone: "", email: "", address: "" }
+            });
+        })
+        .catch(e => console.log("Error:", e));
+}

@@ -10,7 +10,6 @@ export const Home = () => {
 	}, [])
 	return (
 		<div className="container">
-			<h1 className="text-center">Todos</h1>
 			<ul className="list-group">
 				<ListaDeTareas/>
 			</ul>
